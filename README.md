@@ -7,6 +7,6 @@
 下载后打开BaiduPCS-service-win.exe运行.  
 
 ## FAQ
-1.如何更新BaiduPCS-Go?
+1.如何更新BaiduPCS-Web?  
 请前往[BaiduPCS-Web](https://github.com/liuzhuoling2011/baidupcs-web/releases)发布页下载.  
 然后将软件里的BaiduPCS-Go.exe覆盖即可.
