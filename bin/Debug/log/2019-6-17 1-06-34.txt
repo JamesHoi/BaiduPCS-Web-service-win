@@ -1,0 +1,150 @@
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc config BaiduPCS-Go start= auto
+[SC] ChangeServiceConfig 成功
+
+
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc delete BaiduPCS-Go
+[SC] DeleteService 成功
+
+
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc delete BaiduPCS-Go
+[SC] DeleteService 失败 1072:
+
+
+
+指定的服务已标记为删除。
+
+
+
+
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc stop BaiduPCS-Go
+
+
+SERVICE_NAME: BaiduPCS-Go
+
+TYPE               : 10  WIN32_OWN_PROCESS
+
+STATE              : 1  STOPPED
+
+WIN32_EXIT_CODE    : 0  (0x0)
+
+SERVICE_EXIT_CODE  : 0  (0x0)
+
+CHECKPOINT         : 0x0
+
+WAIT_HINT          : 0x0
+
+
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc start BaiduPCS-Go
+[SC] StartService: OpenService 失败 1060:
+
+
+
+指定的服务未安装。
+
+
+
+
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc start BaiduPCS-Go
+[SC] StartService: OpenService 失败 1060:
+
+
+
+指定的服务未安装。
+
+
+
+
+
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug\script>sc create BaiduPCS-Go binpath=D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug\script\srvany.exe 
+[SC] CreateService 成功
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc start BaiduPCS-Go
+
+
+SERVICE_NAME: BaiduPCS-Go
+
+TYPE               : 10  WIN32_OWN_PROCESS
+
+STATE              : 2  START_PENDING
+
+(NOT_STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+
+WIN32_EXIT_CODE    : 0  (0x0)
+
+SERVICE_EXIT_CODE  : 0  (0x0)
+
+CHECKPOINT         : 0x0
+
+WAIT_HINT          : 0x7d0
+
+PID                : 13748
+
+FLAGS              :
+
+
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc stop BaiduPCS-Go
+
+
+SERVICE_NAME: BaiduPCS-Go
+
+TYPE               : 10  WIN32_OWN_PROCESS
+
+STATE              : 1  STOPPED
+
+WIN32_EXIT_CODE    : 0  (0x0)
+
+SERVICE_EXIT_CODE  : 0  (0x0)
+
+CHECKPOINT         : 0x0
+
+WAIT_HINT          : 0x0
+
+
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc delete BaiduPCS-Go
+[SC] DeleteService 成功
+
+
+
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug\script>sc create BaiduPCS-Go binpath=D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug\script\srvany.exe 
+[SC] CreateService 成功
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc start BaiduPCS-Go
+
+
+SERVICE_NAME: BaiduPCS-Go
+
+TYPE               : 10  WIN32_OWN_PROCESS
+
+STATE              : 2  START_PENDING
+
+(NOT_STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+
+WIN32_EXIT_CODE    : 0  (0x0)
+
+SERVICE_EXIT_CODE  : 0  (0x0)
+
+CHECKPOINT         : 0x0
+
+WAIT_HINT          : 0x7d0
+
+PID                : 1504
+
+FLAGS              :
+
+
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc delete BaiduPCS-Go
+[SC] DeleteService 成功
+
+
+
+

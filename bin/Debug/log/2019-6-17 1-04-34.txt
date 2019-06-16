@@ -1,0 +1,39 @@
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug\script>sc create BaiduPCS-Go binpath=D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug\script\srvany.exe 
+[SC] CreateService 成功
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc delete BaiduPCS-Go
+[SC] DeleteService 成功
+
+
+
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug\script>sc create BaiduPCS-Go binpath=D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug\script\srvany.exe 
+[SC] CreateService 成功
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc start BaiduPCS-Go
+
+
+SERVICE_NAME: BaiduPCS-Go
+
+TYPE               : 10  WIN32_OWN_PROCESS
+
+STATE              : 2  START_PENDING
+
+(NOT_STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+
+WIN32_EXIT_CODE    : 0  (0x0)
+
+SERVICE_EXIT_CODE  : 0  (0x0)
+
+CHECKPOINT         : 0x0
+
+WAIT_HINT          : 0x7d0
+
+PID                : 11704
+
+FLAGS              :
+
+
+
+

@@ -1,0 +1,11 @@
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc config BaiduPCS-Go start= auto
+[SC] ChangeServiceConfig 成功
+
+
+
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Debug>sc delete BaiduPCS-Go
+[SC] DeleteService 成功
+
+
+
+

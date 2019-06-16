@@ -1,0 +1,10 @@
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Release\BaiduPCS-service-win.exe.config
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Release\BaiduPCS-service-win.exe
+D:\WorkSpace\Python\BaiduPCS-service-win\bin\Release\BaiduPCS-service-win.pdb
+D:\WorkSpace\Python\BaiduPCS-service-win\obj\Release\BaiduPCS-service-win.csprojAssemblyReference.cache
+D:\WorkSpace\Python\BaiduPCS-service-win\obj\Release\BaiduPCS_service_win.Form1.resources
+D:\WorkSpace\Python\BaiduPCS-service-win\obj\Release\BaiduPCS_service_win.Properties.Resources.resources
+D:\WorkSpace\Python\BaiduPCS-service-win\obj\Release\BaiduPCS-service-win.csproj.GenerateResource.cache
+D:\WorkSpace\Python\BaiduPCS-service-win\obj\Release\BaiduPCS-service-win.csproj.CoreCompileInputs.cache
+D:\WorkSpace\Python\BaiduPCS-service-win\obj\Release\BaiduPCS-service-win.exe
+D:\WorkSpace\Python\BaiduPCS-service-win\obj\Release\BaiduPCS-service-win.pdb
