@@ -148,7 +148,7 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(153, 20);
-            this.toolStripStatusLabel1.Text = "版本号：1.1.0 正式版";
+            this.toolStripStatusLabel1.Text = "版本号：1.2.0 正式版";
             // 
             // Form1
             // 

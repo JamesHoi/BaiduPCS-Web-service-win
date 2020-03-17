@@ -13,12 +13,13 @@ namespace BaiduPCS_service_win
         #region -- Setting --
 
         const string servicename = "BaiduPCS-Go";
-        const string bat_directory = @"\script\createservice.bat";
-        const string baidupcs_directory = @"\script\BaiduPCS-Go.exe";
+        const string bat_directory = @"/script/createservice.bat";
+        const string baidupcs_directory = @"/script/BaiduPCS-Go.exe";
         const string recreate_log = "-- Recreate Action --";
-        const int refresh_delay_ms = 300;
+        const int refresh_delay_ms = 2000;
+        static string startup_path = Application.StartupPath.Replace("\\", "/");
         public bool isRecreate = false;
-        IniFiles ini = new IniFiles(Application.StartupPath + @"\Config.ini");
+        IniFiles ini = new IniFiles(startup_path + @"/Config.ini");
 
         #endregion
 
@@ -37,7 +38,7 @@ namespace BaiduPCS_service_win
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (!File.Exists(Application.StartupPath + @"\script\BaiduPCS-Go.exe"))
+            if (!File.Exists(startup_path + @"/script/BaiduPCS-Go.exe"))
             {
                 DialogResult dr = MessageBox.Show("尚未检测到BaiduPCS-Go.exe，是否前往下载？\n（下载后放入script文件夹下）", "提示", MessageBoxButtons.OKCancel);
                 if (dr == DialogResult.OK) System.Diagnostics.Process.Start("https://github.com/liuzhuoling2011/baidupcs-web/releases");
@@ -49,13 +50,13 @@ namespace BaiduPCS_service_win
                 FileStream fs = new FileStream("Config.ini", FileMode.Create, FileAccess.Write);//创建写入文件 
                 fs.Close();
                 ini.IniWriteValue("App Config", "AutoStart", "True");
-                ini.IniWriteValue("App Config", "Directory", Application.StartupPath);
+                ini.IniWriteValue("App Config", "Directory", startup_path);
                 checkBox1.Checked = true;
             }
             else
             {
                 checkBox1.Checked = Convert.ToBoolean(ini.IniReadValue("App Config", "AutoStart"));
-                if (ini.IniReadValue("App Config", "Directory") != Application.StartupPath) ReCreateService();
+                if (ini.IniReadValue("App Config", "Directory") != startup_path) ReCreateService();
             }
         }
 
@@ -111,9 +112,9 @@ namespace BaiduPCS_service_win
                 Clipboard.SetText(logtxt);
                 MessageBox.Show("已复制日志到剪贴板");
                 string date = DateTime.Now.ToLocalTime().ToString().Replace("/", "-").Replace(":","-");
-                string path = Application.StartupPath + @"\errorlog\";
+                string path = startup_path + @"/errorlog/";
                 string filename = date + ".txt";
-                if(!Directory.Exists(Application.StartupPath + @"\errorlog")) System.IO.Directory.CreateDirectory(path);
+                if(!Directory.Exists(startup_path + @"/errorlog")) System.IO.Directory.CreateDirectory(path);
                 FileStream fs = new FileStream(path + filename, FileMode.Create);
                 StreamWriter sw = new StreamWriter(fs);
                 sw.WriteLine(logtxt.Replace("\n","\r\n"));
@@ -168,21 +169,22 @@ namespace BaiduPCS_service_win
 
         private void CreateService(int solution)
         {
-            FileStream fs = new FileStream(Application.StartupPath + bat_directory, FileMode.Create);
+            FileStream fs = new FileStream(startup_path + bat_directory, FileMode.Create);
             StreamWriter sw = new StreamWriter(fs);
             string createcommand = "";
+            string path = "\"".Insert(1, startup_path);
             switch (solution)
             {
                 case 1:
-                    createcommand = "sc create " + servicename + " binpath=" + Application.StartupPath + @"\script\srvany.exe";
+                    createcommand = "sc create " + servicename + " binpath=" + path + "/script/srvany.exe\"";
                     break;
                 case 2:
-                    createcommand = "instsrv.exe " + servicename + " " + Application.StartupPath + @"\script\srvany.exe";
+                    createcommand = path + "/script/instsrv.exe\" " + servicename + " " + path + "/script/srvany.exe\"";
                     break;
             }
             sw.WriteLine(createcommand);
             sw.Flush(); sw.Close(); fs.Close();
-            string output = RunBat(Application.StartupPath + bat_directory);
+            string output = RunBat(startup_path + bat_directory);
 
             //check service if it is installed
             Thread.Sleep(refresh_delay_ms);
@@ -202,15 +204,15 @@ namespace BaiduPCS_service_win
                 RegistryKey key = Registry.LocalMachine;
                 string directory = @"System\CurrentControlSet\Services\" + servicename + @"\Parameters";
                 RegistryKey service = key.CreateSubKey(directory);
-                service.SetValue("Application", Application.StartupPath + baidupcs_directory);
-                service.SetValue("AppDirectory", Application.StartupPath + @"\script");
+                service.SetValue("Application", startup_path + baidupcs_directory);
+                service.SetValue("AppDirectory", startup_path + @"\script");
                 service.SetValue("AppParameters", "");
                 service.Close();
                 key.Close();
             }catch(Exception e)
             {
                 MessageBox.Show("注册表修改失败！请确保已关闭所有安全软件", "提示");
-                DeleteService();
+                DeleteService(0);
                 CheckService();
             }
         }
@@ -219,14 +221,14 @@ namespace BaiduPCS_service_win
         {
             MessageBox.Show("检测到软件目录变更，自动重新注册服务", "提示");
             isRecreate = true;
-            DeleteService();
+            DeleteService(1);
             CreateService(1);
-            ini.IniWriteValue("App Config", "Directory", Application.StartupPath);
+            ini.IniWriteValue("App Config", "Directory", startup_path);
         }
 
-        private void DeleteService()
+        private void DeleteService(int mode)
         {
-            if (IsServiceRunning(servicename))
+            if (IsServiceRunning(servicename)&&mode!=1)
             {
                 MessageBox.Show("请先关闭服务后再卸载", "提示");
                 return;
@@ -251,25 +253,34 @@ namespace BaiduPCS_service_win
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //button1.Enabled = false;
             bool isinstalled = IsServiceInstalled(servicename);
-            if (isinstalled) DeleteService();
+            if (isinstalled) DeleteService(0);
             else
             {
                 CreateService(1);
                 checkBox1.Checked = true;
             }
+            //Application.DoEvents();
+            //button1.Enabled = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            button2.Enabled = false;
             string action = "";
             bool isrunning = IsServiceRunning(servicename);
             if (isrunning) action = "stop";
             else action = "start";
             RunCmdCommand("sc " + action + " " + servicename);
             Thread.Sleep(refresh_delay_ms);
+            if (isrunning == IsServiceRunning(servicename))
+            {
+                DisplayError();
+            }
             CheckServiceRunning();
-            if (isrunning == IsServiceRunning(servicename)) DisplayError();
+            Application.DoEvents();
+            button2.Enabled = true;
         }
 
         private void CheckService()
