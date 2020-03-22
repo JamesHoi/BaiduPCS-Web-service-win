@@ -1,5 +1,5 @@
 # BaiduPCS-Web-service-win
-此软件将[BaiduPCS-Web](https://github.com/liuzhuoling2011/baidupcs-web)加入服务，并实现开机自启
+此软件将[BaiduPCS-Web](https://github.com/liuzhuoling2011/baidupcs-web)加入服务，并实现开机自启  
 [详细原理介绍](https://jameshoi.github.io/2019/06/17/baidupcs-service/)
 
 ## 软件预览 
